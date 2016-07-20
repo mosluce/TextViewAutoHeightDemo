@@ -8,18 +8,30 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, UITextViewDelegate {
+    
+    @IBOutlet weak var textviewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textview: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        textview.delegate = self
+        
     }
-
+    
+    func textViewDidChange(textView: UITextView) {
+        let sizeThatFitsTextView = textview.sizeThatFits(CGSizeMake(textview.frame.width, CGFloat.max))
+        
+        textviewHeightConstraint.constant = sizeThatFitsTextView.height
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
 
